@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  app:
+    image: registry.gitlab.com/leo-nguyen/docker-m2:7.2-apache-stretch
+    volumes:
+        - '${PWD}/src:/public_html'
+        # - './composer/cache:/home/.composer/cache'
+        # - './composer/auth.json:/home/.composer/auth.json'
+        - '${PWD}/sites:/etc/apache2/sites-enabled'
+    sysctls:
+      net.ipv4.ip_unprivileged_port_start: '0'
+    env_file:
+        - database.env
+    ports:
+        - '80:80'
