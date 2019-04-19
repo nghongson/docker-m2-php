@@ -57,8 +57,11 @@ RUN curl -L -o n98-magerun2.phar https://files.magerun.net/n98-magerun2.phar \
 COPY mage-install /usr/local/bin/mage-install
 RUN chmod +x /usr/local/bin/mage-install
 
-RUN if [ ! ${PHP_MOD} = "apache" ]; then \
-        a2enmod rewrite; \
-    fi;
+COPY ./php-entrypoint.sh /usr/local/bin/php-entrypoint.sh
+RUN chmod +x /usr/local/bin/php-entrypoint.sh
+
+ENTRYPOINT ["php-entrypoint.sh"]
 
 USER www-data
+EXPOSE 9000
+CMD ["php-fpm"]
