@@ -34,7 +34,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 
 # install mcrypt
 RUN apt-get install -y libmcrypt-dev
-RUN pecl install mcrypt-1.0.1 \
+RUN pecl install mcrypt-1.0.2 \
   && docker-php-ext-enable mcrypt
 
 # install xdebug

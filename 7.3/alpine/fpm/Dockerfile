@@ -48,7 +48,7 @@ RUN  set -xe \
 			libmcrypt-dev \
 			libltdl \
       gcc g++ make \
-  && pecl install mcrypt-1.0.1
+  && pecl install mcrypt-1.0.2
 RUN docker-php-ext-enable mcrypt
 
 RUN pecl install xdebug-2.6.0 \
