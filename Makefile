@@ -33,20 +33,12 @@ build70:
 	$(MAKE) build version=7.0 mode=fpm
 	$(MAKE) build version=7.0 mode=cli
 	$(MAKE) build version=7.0 mode=apache
-
-	printf "${COLOR_COMMENT}Build Images Magento PHP7.1 Distro Alpine :${COLOR_RESET}\n"
-	$(MAKE) build version=7.0 mode=cli distro=alpine
-	$(MAKE) build version=7.0 mode=fpm distro=alpine
 build71:
 	printf "${COLOR_COMMENT}Build Images Magento PHP7.1 Distro Debian :${COLOR_RESET}\n"
 	$(MAKE) build version=7.1
 	$(MAKE) build version=7.1 mode=fpm
 	$(MAKE) build version=7.1 mode=cli
 	$(MAKE) build version=7.1 mode=apache
-
-	printf "${COLOR_COMMENT}Build Images Magento PHP7.1 Distro Alpine :${COLOR_RESET}\n"
-	$(MAKE) build version=7.1 mode=cli distro=alpine
-	$(MAKE) build version=7.1 mode=fpm distro=alpine
 
 build72:
 	printf "${COLOR_COMMENT}Build Images Magento PHP7.2 Distro Debian :${COLOR_RESET}\n"

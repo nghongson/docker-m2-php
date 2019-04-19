@@ -1,4 +1,4 @@
-ARG PHP_MOD=fpm
+ARG PHP_MOD=cli
 ARG PHP_VERSION=7.1
 FROM php:${PHP_VERSION}-${PHP_MOD}
 WORKDIR "/public_html"
@@ -59,15 +59,10 @@ RUN curl -L -o n98-magerun2.phar https://files.magerun.net/n98-magerun2.phar \
 COPY mage-install /usr/local/bin/mage-install
 RUN chmod +x /usr/local/bin/mage-install
 
-RUN if [ ! ${PHP_MOD} = "apache" ]; then \
-        a2enmod rewrite; \
-    fi;
-
-ENV ENABLE_XDEBUG false
 COPY ./php-entrypoint.sh /usr/local/bin/php-entrypoint.sh
 RUN chmod +x /usr/local/bin/php-entrypoint.sh
 
 ENTRYPOINT ["php-entrypoint.sh"]
 
 USER www-data
-CMD ["php-fpm"]
+CMD ["php", "-a"]
