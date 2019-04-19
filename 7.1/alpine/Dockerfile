@@ -51,6 +51,11 @@ RUN  set -xe \
 			--with-mcrypt \
 		&& docker-php-ext-install mcrypt
 
+RUN  set -xe \
+  && apk add --no-cache \
+      autoconf \
+      gcc g++ make
+
 RUN pecl install xdebug-2.6.0 \
   && docker-php-ext-enable xdebug
 

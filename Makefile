@@ -26,7 +26,7 @@ help:
 ###############
 build:
 	printf "${COLOR_COMMENT}Build Application Images:${COLOR_RESET}\n"
-	docker build -t ${IMAGE}:${version}-${mode}-${distro} --build-arg PHP_MOD=${mode} ${version}/${distro}
+	docker build -t ${IMAGE}:${version}-${mode}-${distro} --build-arg PHP_MOD=${mode} ${version}/${distro}/${mode}
 build70:
 	printf "${COLOR_COMMENT}Build Images Magento PHP7.1 Distro Debian :${COLOR_RESET}\n"
 	$(MAKE) build version=7.0
@@ -56,8 +56,6 @@ build72:
 	$(MAKE) build version=7.2 mode=apache
 
 	printf "${COLOR_COMMENT}Build Images Magento PHP7.2 Distro Alpine :${COLOR_RESET}\n"
-	$(MAKE) build version=7.2 mode=cli distro=alpine
-	$(MAKE) build version=7.2 mode=fpm distro=alpine
 
 build73:
 	printf "${COLOR_COMMENT}Build Images Magento PHP7.2 Distro Debian :${COLOR_RESET}\n"

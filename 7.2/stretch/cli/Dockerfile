@@ -1,6 +1,6 @@
-ARG PHP_MOD=fpm
-ARG PHP_VERSION=7.1
-FROM php:${PHP_VERSION}-${PHP_MOD}
+ARG PHP_SERVER=cli
+ARG PHP_VERSION=7.2
+FROM php:${PHP_VERSION}-${PHP_SERVER}
 WORKDIR "/public_html"
 
 ARG UID=1000
@@ -34,10 +34,8 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 
 # install mcrypt
 RUN apt-get install -y libmcrypt-dev
-
-RUN docker-php-ext-configure mcrypt \
-			--with-mcrypt \
-		&& docker-php-ext-install mcrypt
+RUN pecl install mcrypt-1.0.1 \
+  && docker-php-ext-enable mcrypt
 
 # install xdebug
 RUN pecl install xdebug-2.6.1 \
@@ -59,15 +57,10 @@ RUN curl -L -o n98-magerun2.phar https://files.magerun.net/n98-magerun2.phar \
 COPY mage-install /usr/local/bin/mage-install
 RUN chmod +x /usr/local/bin/mage-install
 
-RUN if [ ! ${PHP_MOD} = "apache" ]; then \
-        a2enmod rewrite; \
-    fi;
-
-ENV ENABLE_XDEBUG false
 COPY ./php-entrypoint.sh /usr/local/bin/php-entrypoint.sh
 RUN chmod +x /usr/local/bin/php-entrypoint.sh
 
 ENTRYPOINT ["php-entrypoint.sh"]
 
 USER www-data
-CMD ["php-fpm"]
+CMD ["php", "-a"]
